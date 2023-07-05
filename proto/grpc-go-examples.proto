@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpcgoexamples;
+
+option go_package = "grpc-go-examples";
+
+message Input{
+    string myMessage = 1;
+}
+
+message Output{
+    string myResponse = 1;
+}
+
+message MessageList {
+    repeated string Output = 1; 
+}
+
+service SimpleRPC {
+    rpc Get(Input) returns (Output) {}
+    rpc ServerStream(Input) returns(stream Output) {}
+    rpc ClientStream(stream Input) returns(MessageList) {}
+    rpc BidirectionalStream(stream Input) returns (stream Output) {}
+}
